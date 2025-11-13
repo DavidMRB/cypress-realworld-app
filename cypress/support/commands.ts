@@ -341,7 +341,16 @@ Cypress.Commands.add("database", (operation, entity, query, logTask = false) => 
     },
   });
 
-  return cy.task(`${operation}:database`, params, { log: logTask }).then((data) => {
+  // Manejar "db:seed" como caso especial sin agregar ":database"
+  let taskName: string;
+  
+  if (operation === "db:seed") {
+    taskName = "db:seed";
+  } else {
+    taskName = `${operation}:database`;
+  }
+
+  return cy.task(taskName, params, { log: logTask }).then((data) => {
     log.snapshot();
     log.end();
     return data;

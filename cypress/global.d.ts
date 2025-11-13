@@ -73,7 +73,7 @@ declare namespace Cypress {
     /**
      * Filter for data entities via database query
      */
-    database(operation: "filter", entity: string, query?: object, log?: boolean): Chainable<any>;
+    database(operation: "filter" | "db:seed", entity?: string, query?: object, log?: boolean): Chainable<any>;
 
     /**
      * Fetch React component instance associated with received element subject
