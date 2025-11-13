@@ -27,10 +27,14 @@ jobs:
       # 5️⃣ Ejecutar pruebas de Cypress (sin Cypress Cloud)
       - name: Run Cypress tests
         uses: cypress-io/github-action@53299cbe789c64daab823c4bfb1882d05e9feaf3
+        env:
+          PORT: 3000
+          API_PORT: 3001
+          NODE_ENV: test
         with:
           start: yarn start:ci
           wait-on: "http://localhost:3000"
-          wait-on-timeout: 120
+          wait-on-timeout: 180
           browser: chrome
           command: yarn cypress:run  # ⬅️ ejecuta el script correcto
           record: false
