@@ -1,18 +1,50 @@
 name: CI Pipeline
+
 on: [push, pull_request]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
+      # 1️⃣ Checkout del código
       - uses: actions/checkout@v4
+
+      # 2️⃣ Configurar Node y cachear dependencias Yarn
       - uses: actions/setup-node@v4
-      - run: npm ci
-      - run: npm run test:unitx
-      - run: npm run cypress:run
-      - uses: actions/upload-artifact@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      # 3️⃣ Instalar dependencias con Yarn (sin modificar lockfile)
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      # 4️⃣ Ejecutar pruebas unitarias
+      - name: Run unit tests
+        run: yarn test:unit
+
+      # 5️⃣ Ejecutar pruebas de Cypress (sin Cypress Cloud)
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          start: yarn start:ci
+          wait-on: 'http://localhost:3000'
+          wait-on-timeout: 120
+          browser: chrome
+          record: false       # ⬅️ evita el error de record key
+          parallel: false
+          config-file: cypress.config.ts
+
+      # 6️⃣ Subir screenshots si las pruebas fallan
+      - name: Upload Cypress screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+
+      # 7️⃣ Escaneo de SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

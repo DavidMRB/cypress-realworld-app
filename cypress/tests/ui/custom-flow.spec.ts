@@ -6,10 +6,11 @@ describe("Flujo Completo de Usuario", () => {
   const transactionPage = new TransactionPage();
 
   // Datos de prueba
-  const testUser = {
+    const testUser = {
     username: "Katharina_Bernier",
-    password: "s3cret",
-  };
+    // 🔒 Evitamos hard-coded passwords:
+    password: Cypress.env("TEST_USER_PASSWORD") || "default_password",
+    };
 
   beforeEach(() => {
     // Limpiar cookies y visitar la app
