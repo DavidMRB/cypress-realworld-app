@@ -5,7 +5,7 @@ describe("Flujo Completo de Usuario", () => {
 
   const testUser = {
     username: "Katharina_Bernier",
-    password: "s3cret",
+    password: Cypress.env("TEST_USER_PASSWORD") || "default_password",
   };
 
   beforeEach(() => {
