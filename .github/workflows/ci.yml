@@ -13,8 +13,8 @@ jobs:
       # 2️⃣ Configurar Node y cachear dependencias Yarn
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'yarn'
+          node-version: 20
+          cache: "yarn"
 
       # 3️⃣ Instalar dependencias con Yarn (sin modificar lockfile)
       - name: Install dependencies
@@ -29,10 +29,10 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           start: yarn start:ci
-          wait-on: 'http://localhost:3000'
+          wait-on: "http://localhost:3000"
           wait-on-timeout: 120
           browser: chrome
-          record: false       # ⬅️ evita el error de record key
+          record: false # ⬅️ evita el error de record key
           parallel: false
           config-file: cypress.config.ts
 
