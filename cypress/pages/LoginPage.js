@@ -5,17 +5,17 @@
 class LoginPage {
   // Selectores
   elements = {
-    usernameInput: () => cy.get('#username'),
-    passwordInput: () => cy.get('#password'),
+    usernameInput: () => cy.get("#username"),
+    passwordInput: () => cy.get("#password"),
     signInButton: () => cy.get('[data-test="signin-submit"]'),
     errorMessage: () => cy.get('[data-test="signin-error"]'),
     rememberMeCheckbox: () => cy.get('[name="remember"]'),
-    signUpLink: () => cy.contains('a', 'Sign Up')
-  }
+    signUpLink: () => cy.contains("a", "Sign Up"),
+  };
 
   // Acciones
   visit() {
-    cy.visit('/signin');
+    cy.visit("/signin");
     return this;
   }
 
@@ -43,24 +43,24 @@ class LoginPage {
   login(username, password, rememberMe = false) {
     this.fillUsername(username);
     this.fillPassword(password);
-    
+
     if (rememberMe) {
       this.checkRememberMe();
     }
-    
+
     this.clickSignIn();
     return this;
   }
 
   // Verificaciones
   shouldShowError() {
-    this.elements.errorMessage().should('be.visible');
+    this.elements.errorMessage().should("be.visible");
     return this;
   }
 
   shouldRedirectToDashboard() {
-    cy.url().should('include', '/');
-    cy.get('[data-test="sidenav"]').should('be.visible');
+    cy.url().should("include", "/");
+    cy.get('[data-test="sidenav"]').should("be.visible");
     return this;
   }
 }
