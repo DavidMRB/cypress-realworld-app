@@ -26,7 +26,7 @@ jobs:
 
       # 5️⃣ Ejecutar pruebas de Cypress (sin Cypress Cloud)
       - name: Run Cypress tests
-        uses: cypress-io/github-action@3e0c683653e09ee6f64367877d3ebb495719cfb8
+        uses: cypress-io/github-action@53299cbe789c64daab823c4bfb1882d05e9feaf3
         with:
           start: yarn start:ci
           wait-on: "http://localhost:3000"
@@ -47,7 +47,7 @@ jobs:
 
       # 7️⃣ Escaneo de SonarCloud
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@3e0c683653e09ee6f64367877d3ebb495719cfb8
+        uses: SonarSource/sonarcloud-github-action@ba3875ecf642b2129de2b589510c81a8b53dbf4e
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
