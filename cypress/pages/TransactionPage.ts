@@ -3,22 +3,22 @@
  */
 class TransactionPage {
   elements = {
-    newTransactionButton: () => cy.getBySel('nav-top-new-transaction'),
-    userSearchInput: () => cy.getBySel('user-list-search-input'),
+    newTransactionButton: () => cy.getBySel("nav-top-new-transaction"),
+    userSearchInput: () => cy.getBySel("user-list-search-input"),
     userListItem: (userId?: string) => {
       if (userId) {
         return cy.getBySel(`user-list-item-${userId}`);
       }
-      return cy.getBySelLike('user-list-item');
+      return cy.getBySelLike("user-list-item");
     },
-    amountInput: () => cy.getBySelLike('transaction-create-amount-input'),
-    noteInput: () => cy.getBySelLike('transaction-create-description-input'),
-    requestButton: () => cy.getBySel('transaction-create-submit-request'),
-    payButton: () => cy.getBySel('transaction-create-submit-payment'),
-    returnToTransactions: () => cy.getBySel('new-transaction-return-to-transactions'),
+    amountInput: () => cy.getBySelLike("transaction-create-amount-input"),
+    noteInput: () => cy.getBySelLike("transaction-create-description-input"),
+    requestButton: () => cy.getBySel("transaction-create-submit-request"),
+    payButton: () => cy.getBySel("transaction-create-submit-payment"),
+    returnToTransactions: () => cy.getBySel("new-transaction-return-to-transactions"),
     // Cambiado para aceptar opciones
-    alertSuccess: (options?: Partial<Cypress.Loggable & Cypress.Timeoutable>) => 
-      cy.getBySel('alert-bar-success', options),
+    alertSuccess: (options?: Partial<Cypress.Loggable & Cypress.Timeoutable>) =>
+      cy.getBySel("alert-bar-success", options),
   };
 
   createNewTransaction() {
@@ -28,8 +28,8 @@ class TransactionPage {
 
   searchUser(username: string) {
     this.elements.userSearchInput().type(username);
-    // Esperar a que se procesen los resultados
-    cy.wait(500);
+    // Esperar a que los resultados de búsqueda aparezcan
+    this.elements.userListItem().should("have.length.greaterThan", 0);
     return this;
   }
 
@@ -69,21 +69,22 @@ class TransactionPage {
   }
 
   shouldShowSuccessAlert() {
-    this.elements.alertSuccess({ timeout: 10000 })
-      .should('be.visible')
-      .and('contain', 'Transaction Submitted');
+    this.elements
+      .alertSuccess({ timeout: 10000 })
+      .should("be.visible")
+      .and("contain", "Transaction Submitted");
     return this;
   }
 
   shouldHaveDisabledButtons() {
-    this.elements.payButton().should('be.disabled');
-    this.elements.requestButton().should('be.disabled');
+    this.elements.payButton().should("be.disabled");
+    this.elements.requestButton().should("be.disabled");
     return this;
   }
 
   shouldHaveEnabledButtons() {
-    this.elements.payButton().should('not.be.disabled');
-    this.elements.requestButton().should('not.be.disabled');
+    this.elements.payButton().should("not.be.disabled");
+    this.elements.requestButton().should("not.be.disabled");
     return this;
   }
 }

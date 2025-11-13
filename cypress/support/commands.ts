@@ -343,7 +343,7 @@ Cypress.Commands.add("database", (operation, entity, query, logTask = false) => 
 
   // Manejar "db:seed" como caso especial sin agregar ":database"
   let taskName: string;
-  
+
   if (operation === "db:seed") {
     taskName = "db:seed";
   } else {
