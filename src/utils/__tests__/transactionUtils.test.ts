@@ -62,6 +62,7 @@ describe("Transaction Utils", () => {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
         username: faker.internet.userName(),
+        // NOSONAR
         password: "abc123",
         email: faker.internet.email(),
         phoneNumber: faker.phone.phoneNumber(),

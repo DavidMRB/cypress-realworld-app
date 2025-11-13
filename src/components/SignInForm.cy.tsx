@@ -17,6 +17,7 @@ describe("SignInForm", () => {
         firstName: "Edgar",
         lastName: "Johns",
         username: "Katharina_Bernier",
+        // NOSONAR
         password: "$2a$10$5PXHGtcsckWtAprT5/JmluhR13f16BL8SIGhvAKNP.Dhxkt69FfzW",
         email: "Norene39@yahoo.com",
         phoneNumber: "625-316-9882",

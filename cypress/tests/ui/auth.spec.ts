@@ -52,6 +52,7 @@ describe("User Sign-up and Login", function () {
       firstName: "Bob",
       lastName: "Ross",
       username: "PainterJoy90",
+      // NOSONAR
       password: "s3cret",
     };
 
